@@ -1,0 +1,47 @@
+{
+  "name": "truffle_boilerplate",
+  "version": "0.0.1",
+  "description": "A shared repo for building a boilerplate smart contract project",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "start": "concurrently \"npm run ganache\" \"npm run truffle:local\"",
+    "start:kovan": "concurrently \"npm run ganache:kovan\" \"npm run truffle:local\"",
+    "start:rinkeby": "concurrently \"npm run ganache:rinkeby\" \"npm run truffle:local\"",
+    "start:ropsten": "concurrently \"npm run ganache:ropsten\" \"npm run truffle:local\"",
+    "test": "concurrently \"npm run ganache\" \"npm run truffle:local && truffle test\" --kill-others --success first",
+    "test:kovan": "concurrently \"npm run ganache:kovan\" \"npm run truffle:local && truffle test\" --kill-others --success first",
+    "test:rinkeby": "concurrently \"npm run ganache:rinkeby\" \"npm run truffle:local && truffle test\" --kill-others --success first",
+    "test:ropsten": "concurrently \"npm run ganache:ropsten\" \"npm run truffle:local && truffle test\" --kill-others --success first",
+    "ganache": "ganache-cli --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --mnemonic \"$MNEMONIC\"",
+    "ganache:kovan": "npm run ganache -- --fork \"https://kovan.infura.io/v3/$INFURA_PROJECT_ID\"",
+    "ganache:rinkeby": "npm run ganache -- --fork \"https://rinkeby.infura.io/v3/$INFURA_PROJECT_ID\"",
+    "ganache:ropsten": "npm run ganache -- --fork \"https://ropsten.infura.io/v3/$INFURA_PROJECT_ID\"",
+    "truffle:local": "rm -rf build && truffle migrate --reset --compile-all --network development",
+    "truffle:kovan": "rm -rf build && truffle migrate --reset --compile-all --network kovan",
+    "truffle:rinkeby": "rm -rf build && truffle migrate --reset --compile-all --network rinkeby",
+    "truffle:ropsten": "rm -rf build && truffle migrate --reset --compile-all --network ropsten"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tylerjohnhaden/__truffle-boilerplate"
+  },
+  "author": "Tyler John Haden",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "concurrently": "^4.1.0",
+    "ganache-cli": "^6.2.5",
+    "truffle": "^5.0.0",
+    "truffle-hdwallet-provider": "1.0.2",
+    "truffle-test-utils": "^0.1.0"
+  },
+  "config": {
+    "ganache": {
+      "networkId": 3431,
+      "gasPrice": 25000000000,
+      "gasLimit": 6500000
+    }
+  }
+}
