@@ -34,6 +34,7 @@
   "dependencies": {
     "concurrently": "^4.1.0",
     "ganache-cli": "^6.2.5",
+    "openzeppelin-solidity": "^2.1.1",
     "truffle": "^5.0.0",
     "truffle-hdwallet-provider": "1.0.2",
     "truffle-test-utils": "^0.1.0"
