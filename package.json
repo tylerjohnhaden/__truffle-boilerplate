@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "A shared repo for building a boilerplate smart contract project",
   "main": "truffle-config.js",
-  "directories": {
-    "test": "test"
-  },
+  "files": [
+    "build",
+    "contracts",
+    "test"
+  ],
   "scripts": {
     "start": "concurrently \"npm run ganache\" \"npm run migrate\"",
     "start:kovan": "concurrently \"npm run ganache:kovan\" \"npm run migrate\"",
@@ -23,22 +25,16 @@
     "migrate": "rm -rf build && truffle migrate --reset --compile-all --network development",
     "migrate:kovan": "rm -rf build && truffle migrate --reset --compile-all --network kovan",
     "migrate:rinkeby": "rm -rf build && truffle migrate --reset --compile-all --network rinkeby",
-    "migrate:ropsten": "rm -rf build && truffle migrate --reset --compile-all --network ropsten"
+    "migrate:ropsten": "rm -rf build && truffle migrate --reset --compile-all --network ropsten",
+    "lint:sol": "solium -d .",
+    "lint:sol:fix": "solium -d . --fix"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/tylerjohnhaden/__truffle-boilerplate"
   },
   "author": "Tyler John Haden",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "concurrently": "^4.1.0",
-    "ganache-cli": "^6.2.5",
-    "openzeppelin-solidity": "^2.1.1",
-    "truffle": "^5.0.0",
-    "truffle-hdwallet-provider": "1.0.2",
-    "truffle-test-utils": "^0.1.0"
-  },
+  "license": "MIT",
   "config": {
     "ganache": {
       "networkId": 3431,
@@ -47,6 +43,14 @@
     }
   },
   "devDependencies": {
-    "eth-gas-reporter": "^0.1.12"
-  }
+    "eth-gas-reporter": "^0.1.12",
+    "solium": "^1.1.8",
+    "concurrently": "^4.1.0",
+    "ganache-cli": "^6.2.5",
+    "openzeppelin-solidity": "^2.1.1",
+    "truffle": "^5.0.0",
+    "truffle-hdwallet-provider": "1.0.2",
+    "truffle-test-utils": "^0.1.0"
+  },
+  "dependencies": {}
 }
