@@ -27,7 +27,8 @@
     "migrate:rinkeby": "rm -rf build && truffle migrate --reset --compile-all --network rinkeby",
     "migrate:ropsten": "rm -rf build && truffle migrate --reset --compile-all --network ropsten",
     "lint:sol": "solium -d .",
-    "lint:sol:fix": "solium -d . --fix"
+    "lint:sol:fix": "solium -d . --fix",
+    "coverage": "solidity-coverage"
   },
   "repository": {
     "type": "git",
@@ -48,6 +49,7 @@
     "ethlint": "^1.2.1",
     "ganache-cli": "^6.2.5",
     "openzeppelin-solidity": "^2.1.1",
+    "solidity-coverage": "^0.5.11",
     "truffle": "^5.0.0",
     "truffle-hdwallet-provider": "1.0.2",
     "truffle-test-utils": "^0.1.0"

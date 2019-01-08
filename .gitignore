@@ -1,7 +1,13 @@
 ######################
-# Application Specific
+# Truffle
 ######################
-build/
+build
+
+######################
+# Test Coverage
+######################
+coverage
+coverage.json
 
 ######################
 # Node
