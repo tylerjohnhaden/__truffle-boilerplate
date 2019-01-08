@@ -7,22 +7,23 @@
     "test": "test"
   },
   "scripts": {
-    "start": "concurrently \"npm run ganache\" \"npm run truffle:local\"",
-    "start:kovan": "concurrently \"npm run ganache:kovan\" \"npm run truffle:local\"",
-    "start:rinkeby": "concurrently \"npm run ganache:rinkeby\" \"npm run truffle:local\"",
-    "start:ropsten": "concurrently \"npm run ganache:ropsten\" \"npm run truffle:local\"",
-    "test": "concurrently \"npm run ganache\" \"npm run truffle:local && truffle test\" --kill-others --success first",
-    "test:kovan": "concurrently \"npm run ganache:kovan\" \"npm run truffle:local && truffle test\" --kill-others --success first",
-    "test:rinkeby": "concurrently \"npm run ganache:rinkeby\" \"npm run truffle:local && truffle test\" --kill-others --success first",
-    "test:ropsten": "concurrently \"npm run ganache:ropsten\" \"npm run truffle:local && truffle test\" --kill-others --success first",
+    "start": "concurrently \"npm run ganache\" \"npm run migrate\"",
+    "start:kovan": "concurrently \"npm run ganache:kovan\" \"npm run migrate\"",
+    "start:rinkeby": "concurrently \"npm run ganache:rinkeby\" \"npm run migrate\"",
+    "start:ropsten": "concurrently \"npm run ganache:ropsten\" \"npm run migrate\"",
+    "test": "concurrently \"npm run ganache\" \"npm run migrate && truffle test\" --kill-others --success first",
+    "test:kovan": "concurrently \"npm run ganache:kovan\" \"npm run migrate && truffle test\" --kill-others --success first",
+    "test:rinkeby": "concurrently \"npm run ganache:rinkeby\" \"npm run migrate && truffle test\" --kill-others --success first",
+    "test:ropsten": "concurrently \"npm run ganache:ropsten\" \"npm run migrate && truffle test\" --kill-others --success first",
+    "test:all-testnets": "npm run test && npm run test:kovan && npm run test:rinkeby && npm run test:ropsten",
     "ganache": "ganache-cli --networkId $npm_package_config_ganache_networkId --allowUnlimitedContractSize --gasLimit $npm_package_config_ganache_gasLimit --mnemonic \"$MNEMONIC\"",
     "ganache:kovan": "npm run ganache -- --fork \"https://kovan.infura.io/v3/$INFURA_PROJECT_ID\"",
     "ganache:rinkeby": "npm run ganache -- --fork \"https://rinkeby.infura.io/v3/$INFURA_PROJECT_ID\"",
     "ganache:ropsten": "npm run ganache -- --fork \"https://ropsten.infura.io/v3/$INFURA_PROJECT_ID\"",
-    "truffle:local": "rm -rf build && truffle migrate --reset --compile-all --network development",
-    "truffle:kovan": "rm -rf build && truffle migrate --reset --compile-all --network kovan",
-    "truffle:rinkeby": "rm -rf build && truffle migrate --reset --compile-all --network rinkeby",
-    "truffle:ropsten": "rm -rf build && truffle migrate --reset --compile-all --network ropsten"
+    "migrate": "rm -rf build && truffle migrate --reset --compile-all --network development",
+    "migrate:kovan": "rm -rf build && truffle migrate --reset --compile-all --network kovan",
+    "migrate:rinkeby": "rm -rf build && truffle migrate --reset --compile-all --network rinkeby",
+    "migrate:ropsten": "rm -rf build && truffle migrate --reset --compile-all --network ropsten"
   },
   "repository": {
     "type": "git",
@@ -43,5 +44,8 @@
       "gasPrice": 25000000000,
       "gasLimit": 6500000
     }
+  },
+  "devDependencies": {
+    "eth-gas-reporter": "^0.1.12"
   }
 }

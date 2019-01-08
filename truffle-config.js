@@ -23,47 +23,58 @@ if (infuraProjectId === undefined || infuraProjectId === '') {
 
 // https://truffleframework.com/docs/truffle/reference/configuration
 var truffleConfig = {
-  networks: {
-    development: {
-      host: '127.0.0.1',  // ganache defaults
-      port: 8545,         // ganache defaults
-      network_id: networkId,
-      gas: gasLimit,
-      gasPrice: gasPrice,
-      // use the local ganache and the mnemonic to generate our main address
-      from: (new HDWalletProvider(mnemonic, "http://127.0.0.1:8545")).getAddress(0)
+    networks: {
+        development: {
+            host: '127.0.0.1',  // ganache defaults
+            port: 8545,         // ganache defaults
+            network_id: networkId,
+            gas: gasLimit,
+            gasPrice: gasPrice,
+            // use the local ganache and the mnemonic to generate our main address
+            from: (new HDWalletProvider(mnemonic, "http://127.0.0.1:8545")).getAddress(0)
+        },
+        kovan: {
+            provider: () =>
+                new HDWalletProvider(mnemonic, `https://kovan.infura.io/v3/${infuraProjectId}`),
+            network_id: 42, // Kovan Id
+            gas: 3000000,
+            gasPrice: 100000000000
+        },
+        rinkeby: {
+            provider: () =>
+                new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraProjectId}`),
+            network_id: 4, // Rinkeby Id
+            gas: 3000000,
+            gasPrice: 100000000000
+        },
+        ropsten: {
+            provider: () =>
+                new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${infuraProjectId}`),
+            network_id: 3, // Ropsten Id
+            gas: 3000000,
+            gasPrice: 100000000000
+        },
+        live: {
+            provider: () =>
+                new HDWalletProvider(mnemonic, `https://mainnet.infura.io/v3/${infuraProjectId}`),
+            network_id: 1, // Mainnet Id
+            gas: 4000000,
+            gasPrice: 100000000000
+        }
     },
-    kovan: {
-      provider: () =>
-        new HDWalletProvider(mnemonic, `https://kovan.infura.io/v3/${infuraProjectId}`),
-      network_id: '42', // Kovan Id
-      gasLimit: 3000000 // gas limit used for deploys
+    solc: {
+        optimizer: {
+            enabled: true,
+            runs: 200
+        }
     },
-    rinkeby: {
-        provider: () =>
-            new HDWalletProvider(mnemonic, `https://rinkeby.infura.io/v3/${infuraProjectId}`),
-        network_id: '4', // Rinkeby Id
-        gasLimit: 3000000 // gas limit used for deploys
-    },
-    ropsten: {
-        provider: () =>
-            new HDWalletProvider(mnemonic, `https://ropsten.infura.io/v3/${infuraProjectId}`),
-        network_id: '3', // Ropsten Id
-        gasLimit: 3000000 // gas limit used for deploys
-    }
-  },
-  solc: {
-      optimizer: {
-          enabled: true,
-          runs: 200
-          /*
-           * If you want the initial contract deployment to be cheaper and the later function
-           * executions to be more expensive, set it to --runs=1. If you expect many transactions
-           * and do not care for higher deployment cost and output size, set --runs to a high number.
-           * (200 is default)
-           */
+    mocha: {
+        reporter: 'eth-gas-reporter',
+        reporterOptions : {
+            currency: 'USD',
+            gasPrice: 2
       }
-  }
+    }
 };
 
 console.info('\nSetting Truffle Configuration:\n', truffleConfig, '\n');
