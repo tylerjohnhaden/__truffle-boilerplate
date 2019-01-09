@@ -43,6 +43,10 @@
       "gasLimit": 6500000
     }
   },
+  "engines": {
+    "node": "11.6.x",
+    "npm": "6.5.x"
+  },
   "devDependencies": {
     "concurrently": "^4.1.0",
     "eth-gas-reporter": "^0.1.12",
